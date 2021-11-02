@@ -1,0 +1,1 @@
+Soup to nuts internal company application that uses Flask framework for the frontend functionality. Backend is an Ngninx host and a MySQL database in an Ubuntu environment. Nginx host is used as reverse proxy to deploy the flask app. 
