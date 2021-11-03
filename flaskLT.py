@@ -4,6 +4,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 
+"""
 def getSqlAlchemyString():
         ''' Set configuration variables for MySQL Access via SQLAlchemy '''
         # string parameters 
@@ -11,8 +12,35 @@ def getSqlAlchemyString():
         password = "lifetimeProperties123!"
         host = "localhost"
         db_name = "testdb"
+        db_cnctr_mod = "pymysql"   # using PyMySql but will change for other modules
+        
+        # optional configs
+        default_mysql_port = True
+        if not default_mysql_port:
+            port = input("Input non-default port #:  ")
+            uri_prefix = mysql+{db_cnctr_mod}://
+            uri_db_confs = 
+            sqlalch_uri = f"mysql+{pymysql_connector_module}://{username}:{password}@{host}/{db_name}"
+            mysql_uri_str = f"mysql+mysqlconnector://{username}:{password}@{host}/{db_name}"
+
+        port = "3306"     ## default mysql port
         # sqlachemy uri variable
+        # mysql_uri_str = f"mysql+mysqlconnector://{username}:{password}@{host}/{db_name}"
         mysql_uri_str = f"mysql+mysqlconnector://{username}:{password}@{host}/{db_name}"
+"""
+
+def getSqlAlchemyString():
+        ''' Set configuration variables for MySQL Access via SQLAlchemy '''
+        # string parameters 
+        username = "flaskapp"
+        password = "lifetimeProperties123!"
+        host = "localhost"
+        db_name = "testdb"
+        db_cnctr_mod = "pymysql"   # using PyMySql but will change for other modules
+        
+        # optional configs
+        mysql_uri_str = f"mysql+{db_cnctr_mod}://{username}:{password}@{host}/{db_name}"
+        print(f"URI STRING:  {mysql_uri_str}\n")
         return mysql_uri_str
 
 # creating flask app
@@ -28,7 +56,7 @@ db = SQLAlchemy(app)
 class Role(db.Model):
         ''' Table defines "ROLES" (job functions) which will be used in permission groups'''
         __tablename__ = 'roles'
-        id = db.Column(db.Integer, primary_key_=True)
+        id = db.Column(db.Integer, primary_key=True)
         name = db.Column(db.String(64), unique=True)
 
         def __repr__(self):
@@ -36,6 +64,7 @@ class Role(db.Model):
 
 class User(db.Model):
         ''' list of USERS (employees) '''
+        __tablename__ = 'users'
         id = db.Column(db.Integer, primary_key = True)
         username = db.Column(db.String(64), unique=True, index=True)
 

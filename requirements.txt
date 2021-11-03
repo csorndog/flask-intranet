@@ -49,7 +49,6 @@ kombu==5.1.0
 Mako==1.1.5
 Markdown==3.3.4
 MarkupSafe==2.0.1
-mysql-connector-python==8.0.27
 outcome==1.1.0
 packaging==21.2
 passlib==1.7.4
