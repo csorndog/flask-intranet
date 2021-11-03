@@ -31,9 +31,17 @@ def getSqlAlchemyString():
 
 def getSqlAlchemyString():
         ''' Set configuration variables for MySQL Access via SQLAlchemy '''
+
         # string parameters 
-        username = "flaskapp"
-        password = "lifetimeProperties123!"
+        #username = "flaskapp"
+        #password = "flaskappTcp12!"
+        #host = "127.0.0.1"
+        #db_name = "testdb"
+        #db_cnctr_mod = "pymysql"   # using PyMySql but will change for other modules
+        
+        # string parameters 
+        username = "root"
+        password = "ubu2Root!"
         host = "localhost"
         db_name = "testdb"
         db_cnctr_mod = "pymysql"   # using PyMySql but will change for other modules
@@ -58,25 +66,21 @@ class Role(db.Model):
         __tablename__ = 'roles'
         id = db.Column(db.Integer, primary_key=True)
         name = db.Column(db.String(64), unique=True)
+        users = db.relationship('User', backref='role')
 
         def __repr__(self):
                 return f'<Role {self.name}>'
 
 class User(db.Model):
         ''' list of USERS (employees) '''
-        __tablename__ = 'users'
+        __tablename__='users'
         id = db.Column(db.Integer, primary_key = True)
         username = db.Column(db.String(64), unique=True, index=True)
-
-        ### FUTURE COLUMNS
-        # email = db.Column()
-        # firstname = db.Column()
-        # lastname = db.Column()
-        # fullname = db.Column()
-        # createdAt= db.Column()
-        # lastModified = db.Column()
-        # activeEmployee = db.Column()
+        role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
 
         def __repr__(self):
                 return f"<User {self.username}>"
 
+@app.shell_context_processor
+def make_shell_context():
+        return dict(db=db, User=User, Role=Role)
