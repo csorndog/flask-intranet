@@ -1,6 +1,4 @@
 import os
-basedir = os.path.abspath(os.path.dirname(__file__))
-
 
 def uri_shared_str():
     ''' shared uri string for diff dbs ; referenced later once db is know '''
@@ -13,9 +11,6 @@ def uri_shared_str():
     sqlalch_uri_stem = f"{username}:{password}@{host}/"
     return sqlalch_uri_stem
     
-
-
-
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'yeezysecretdefaultstring'
     MAIL_SERVER = os.environ.get('MAIL_SERVER', 'smtp.googlemail.com')
