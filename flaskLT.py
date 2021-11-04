@@ -1,6 +1,7 @@
 ''' creating models/tables for Lifetime Prop. with Flask Book as reference example '''
 
 from flask import Flask
+from flask_mail import Message
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
